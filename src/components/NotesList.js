@@ -19,18 +19,21 @@ const NotesList = () => {
 
 
     return ( 
-        <div>
-            <h1>NotesList</h1>
+        <div className="main-content">
+            <h4>NotesList</h4>
+            <div className="notes--list mt-4">
             {                                                                                                     
                 notes.map(note => (      //1. it calls this notes variable
                     //5. return or print data if any there           
-                    <div key={note.noteId}>                               
-                        <p>{note.title}</p>    
+                    <div key={note.noteId} className="notes-preview mt-3">                               
+                        
+                        <h5 className="primary-color text-capitalize">{note.title}</h5>    
                         <p>{note.body}</p>
-                        <p>{note.category}</p>
+                        
                     </div>
                 ))
             }
+            </div>
         </div>
      );
 }

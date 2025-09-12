@@ -1,21 +1,31 @@
-import { useState } from "react"; 
+import { useEffect, useState } from "react"; 
+import NotesService from "../services/NotesService";
 
 const NotesList = () => {  
-    const [notes,   setNotes] = useState([
+    const [notes,   setNotes] = useState([]);       //2.  notes variable use usestate and call useeffect
 
-        {title: "First note", body: "some description", category: "genral"},       
-        {title: "Second note", body: "some description", category: "genral"},      
-        {title: "Third note", body: "some description", category: "genral"}       
-    ])
+    useEffect(() => {
+
+        NotesService.getAll()       //3.   it will call service getall method
+            .then(response => {     //6.  then and catch is used to catch response from spring it return then if correct response is come from spring else it return catch if any error or no data will come
+                console.log('printing response', response.data);  //it will be not mendatory but it is a good practice to do it because it give you clearity than everything is perfect or not and you can esaly find any error
+                setNotes(response.data);
+            })
+            .catch(error => {
+                console.log('something went wrong', error);
+            })
+
+    })
 
 
     return ( 
         <div>
             <h1>NotesList</h1>
             {                                                                                                     
-                notes.map(note => (                 
-                    <div>                               
-                        <p>{note.title}</p>
+                notes.map(note => (      //1. it calls this notes variable
+                    //5. return or print data if any there           
+                    <div key={note.noteId}>                               
+                        <p>{note.title}</p>    
                         <p>{note.body}</p>
                         <p>{note.category}</p>
                     </div>

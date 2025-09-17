@@ -1,0 +1,79 @@
+how data flow or how react + spring works
+		 
+	--->step by step with the correct sequence :
+
+			1. **React initial load**
+			
+			   * When the website opens, `App.js` is rendered.
+			   * Based on the route (`/`), React Router loads the component (e.g., `NotesList.js`). 
+			   								Because for url '/' the notelist.jsis connected
+			   		
+			   		
+			   		function App() {					after app.js render it's function App() called
+							  return (					Than it's return method call
+							    <BrowserRouter>				here we can print or write code that we want in our web 
+							    							but we don't write here in place of it we write it in 
+							    								different .js file inside components folder for this 
+							    								we also import function of that file like
+							    								import AddNote from "./components/AddNote";
+							    								than what ever user clicks on any url that .js file we goes 
+							
+							              <div>
+							                <Navbar />
+							              </div>
+							        
+							        <Routes>
+							            <Route path="/" element={<NotesList /> } />
+							            <Route path="*" element={<NotFound />} />
+							            <Route path="/addnote" element={<AddNote />} />   here if user click path is set and we goto AddNote
+							        </Routes>                                           
+							    
+							    </BrowserRouter>
+							  );
+							}
+							
+							export default App;
+										   		
+			   * `NotesList.js` runs, fetches notes from backend, and prints them in Chrome console/UI.
+			
+			2. **Navigation to Add Note**
+			
+			   * User clicks on navbar → route changes to `/addnote`.
+			   * React Router loads `AddNote.js`.
+			   * `AddNote.js` returns the form UI (from its `return()` JSX).
+			
+			3. **User fills form & submits**
+			
+			   * Input values are stored in state (`useState`).
+			   * On button click → a function (e.g., `handleSubmit`) is called.
+			   * Inside that function, data is converted into JSON.
+			   * more thing excecute but we learn it in next topic 
+			
+			4. **Service layer in React**
+			
+			   * Usually, there’s a `NotesService.js` file where methods like `createNote()` are written.
+			   * That function uses `axios.post("http://localhost:8080/api/notes", jsonData)` to send request.
+			   * also it pick which method is called post or get so we choose method for the method createnote.
+			
+			5. **Spring Boot (Backend)**
+			
+			   * URL `/api/notes` hits the controller method with `@PostMapping("/notes")`.
+			   * `@RequestBody` maps the JSON → into a `NotesEntity` object.
+			   * `notesRepository.save(notesEntity)` saves the data into the database.
+			   * Spring returns a JSON response of the saved note with status `201 Created`.
+			
+			6. **React receives response**
+			
+			   * Back in `AddNote.js`, `.then(response => {...})` executes on success.
+			   * If success → UI can navigate back to `/` and show updated list.
+			   * If failure → `.catch(error => {...})` runs and error is shown/logged.
+			
+			---
+			
+			👉 just Remember these details:
+			
+			* React Router decides which component (`NotesList.js`, `AddNote.js`) is shown.
+			* Service functions (`NotesService.js`) handle the actual `fetch/axios` calls.
+			* Backend method chosen depends on **URL mapping (`/notes`) + HTTP method (POST)**.
+			
+	

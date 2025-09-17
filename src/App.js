@@ -17,8 +17,8 @@ function App() {
         <Routes>
             <Route path="/" element={<NotesList /> } />
             <Route path="*" element={<NotFound />} />
-            <Route path="/addnote" element={<AddNote />} /> {/*here we come for path /addnote and app redirect us to Addnote Function which is in AddNote.js   */}
-        </Routes>                                           {/* here we import AddNote function at import section so that our app can reach to that fun/ method  */}
+            <Route path="/addnote" element={<AddNote />} /> 
+        </Routes>                                           
     
     </BrowserRouter>
   );

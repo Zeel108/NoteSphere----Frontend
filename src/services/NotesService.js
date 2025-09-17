@@ -1,7 +1,11 @@
 import httpClient from "../http-common";
 
-const getAll = () => {      //4.  it calls getmapping of with url /notes to spring than if data is there than spring do work as instruction and return json response
+const getAll = () => {     
     return httpClient.get("/notes");
 }
+
+const create = data => {
+    return httpClient.post("/createnote",data);     //6. json data comes here and in backend /createnote restpoint triggers
+}                                                   //7. spring run as commanded and after successes full saving data json response come to addnote.js
  
-export default {getAll};
+export default {getAll, create};

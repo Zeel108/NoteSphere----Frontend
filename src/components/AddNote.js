@@ -10,9 +10,9 @@ const AddNote = () =>{
 
     const savenote = (e) => {           //3. data comes here
         e.preventDefault();
-        const note = {title, body, category};       //4. all data stored in note variable
-        NotesService.create(note)                   //5. sent the json data to service folder   
-            .then(response => {                                     //8. response data comes here and genrate respone to console of web browser
+        const note = {title, body, category};     
+        NotesService.create(note)                    
+            .then(response => {                                   
                 console.log("Note created successfully", response.data);
             })
             .catch(error => {

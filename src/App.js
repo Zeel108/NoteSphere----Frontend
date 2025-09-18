@@ -19,7 +19,7 @@ function App() {
             <Route path="/" element={<NotesList /> } />
             <Route path="*" element={<NotFound />} />
             <Route path="/addnote" element={<AddNote />} />
-            <Route path="/notedetail/:id" element={<NoteDetails />} />     {/*2. now you will go to notedetails.js */} 
+            <Route path="/notedetail/:id" element={<NoteDetails />} />    
         </Routes>                                           
     
     </BrowserRouter>

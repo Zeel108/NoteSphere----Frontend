@@ -8,7 +8,7 @@ const create = data => {
     return httpClient.post("/createnote",data);    
 }                                                  
 
-const details = id => {           /* 6. now we come here and using axios it make request from backend with url extension /notedetails    */
+const details = id => {          
     return httpClient.get(`/notedetails/${id}`);
 } 
  

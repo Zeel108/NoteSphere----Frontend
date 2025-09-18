@@ -77,3 +77,68 @@ how data flow or how react + spring works
 			* Backend method chosen depends on **URL mapping (`/notes`) + HTTP method (POST)**.
 			
 	
+
+ ____________________________________________________________________________________________________________________________________
+|																																	 |
+|										why we use useEffect ( method in place of our own)											 |
+|____________________________________________________________________________________________________________________________________|
+
+--->in general we don’t use useEffect just because React gave it, but because React’s rendering model is pure and declarative.
+
+--->If you write your own method and call it directly, it will run on every render during function execution, which is not always what you want (and can cause infinite loops if it updates state).
+		useEffect tells React:
+
+				“Run this side effect after React has updated the DOM.”
+
+				It gives you control of when to run it (once, on dependency change, etc.) through the dependency array.
+				It avoids polluting your render logic with side effects, keeping rendering predictable and side effects isolated.
+				So compared to your own method:
+				A normal method runs immediately when the component function runs.
+				useEffect runs after render and only under the conditions you specify.
+				That’s why things like data fetching, subscriptions, event listeners, DOM manipulation are done in useEffect instead of inline methods.
+
+--->if you just call your own method inside the component body (not in useEffect), it will execute every time the component renders, which includes:
+
+		>First load
+		>Any state change
+		>Any parent re-render
+		>Any manual refresh
+
+		So if your method fetches/prints a note, it will keep running again and again.
+
+		With useEffect(() => { ... }, []), it runs only once when the component mounts, no matter how many times React re-renders internally. 
+		That’s why useEffect is used to avoid repeated/unnecessary API calls or console prints.
+
+
+--->In React, useEffect(() => {}); is used to run side effects in a component. The behavior depends on the second argument (the dependency array):
+
+	* ____No dependency array____
+
+	code:-
+	useEffect(() => {
+	console.log("Runs after every render");
+	});
+
+	→ Runs after every render (initial + re-renders).
+
+
+	* _____Empty dependency array []______
+
+	code:-
+	useEffect(() => {
+	console.log("Runs only once after first render");
+	}, []);
+
+	→ Runs only once (like componentDidMount). Common for fetching data on load.
+
+
+	* _____With dependencies [x, y]______
+
+	code:-
+	useEffect(() => {
+	console.log("Runs when x or y changes");
+	}, [x, y]);
+
+	→ Runs on first render + whenever x or y changes.
+
+	It means no dependency array → effect runs every time your component re-renders.

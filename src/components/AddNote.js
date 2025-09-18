@@ -8,7 +8,7 @@ const AddNote = () =>{
     const [body, setBody] = useState('');
     const [category, setCategory] = useState('Personal');
 
-    const savenote = (e) => {           //3. data comes here
+    const savenote = (e) => {          
         e.preventDefault();
         const note = {title, body, category};     
         NotesService.create(note)                    
@@ -37,7 +37,7 @@ const AddNote = () =>{
                         className="form-control"
                         id="title"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}      // 1.  set user enter value use state in variable title
+                        onChange={(e) => setTitle(e.target.value)}     
                     />
                 </div>
 
@@ -71,7 +71,7 @@ const AddNote = () =>{
                 </div>
 
                 <div className="text-center">
-                    <button onClick={(e) => savenote(e)}>           {/*2. after click on save onclick will trigger and call saveuser method   */}
+                    <button onClick={(e) => savenote(e)}>          
                         Save                        </button>
                 </div>
             </form>

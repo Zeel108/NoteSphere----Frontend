@@ -25,7 +25,7 @@ const NotesList  = () => {
             {
                 notes.length > 0 ? notes.map(note => (
                     <div key={note.noteId} className="notes-preview mt-3">
-                        <Link to={`/notedetail/${note.noteId}`}>     {/* 1. you hit this url to open single note that this url must match to app.js url so that u can asscces notesdetails.js   */}
+                        <Link to={`/notedetail/${note.noteId}`}>    
                             <h5 className="primary-color text-capitalize">{note.title}</h5>
                             <div className="text-italic">
                                 {moment(note.updatedAt).fromNow()}  

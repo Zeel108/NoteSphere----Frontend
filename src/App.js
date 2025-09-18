@@ -5,6 +5,7 @@ import NotesList from './components/NotesList';
 import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import AddNote from "./components/AddNote";
+import NoteDetails from "./components/NoteDetails";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Routes>
             <Route path="/" element={<NotesList /> } />
             <Route path="*" element={<NotFound />} />
-            <Route path="/addnote" element={<AddNote />} /> 
+            <Route path="/addnote" element={<AddNote />} />
+            <Route path="/notedetail/:id" element={<NoteDetails />} />     {/*2. now you will go to notedetails.js */} 
         </Routes>                                           
     
     </BrowserRouter>

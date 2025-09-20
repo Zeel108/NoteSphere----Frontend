@@ -1,24 +1,35 @@
 import { useEffect, useState } from "react";
 import NotesService from "../services/NotesService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const NoteDetails = () => {
    
     const {id} = useParams();
     const[currentNote, setCurrentNote] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         NotesService.details(id)          
             .then(note => {     
-                setCurrentNote(note.data);     
-
-                                         
+                setCurrentNote(note.data);                                              
             })
             .catch(error => {
                 console.log('something went wrong in getting details of note.', error);
             })
     }, []);
+
+    const DeleteNote = () => {
+        NotesService.deletenote(id)
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log('something went wrong in getting details of note.',error);
+            })
+
+
+    };
 
     return (                
         <div className="note-details main-content">             
@@ -32,8 +43,10 @@ const NoteDetails = () => {
                         </div>
                         <div className="mb-3">{currentNote.body}</div>
                     </article>
-                    <button >Edit</button>
-                    <button className="ml-3">Delete</button>
+                    <button className="ml-3">Edit</button>
+                    <button className="ml-3"
+                            onClick={DeleteNote}
+                            >Delete</button>
                 </div>
             )}
         </div>

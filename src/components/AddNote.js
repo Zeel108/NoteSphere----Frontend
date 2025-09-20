@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NotesService from "../services/NotesService";
+import { useNavigate } from "react-router-dom";
 
 
 const AddNote = () =>{  
@@ -7,12 +8,14 @@ const AddNote = () =>{
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [category, setCategory] = useState('Personal');
+    const navigate = useNavigate();
 
     const savenote = (e) => {          
         e.preventDefault();
         const note = {title, body, category};     
         NotesService.create(note)                    
             .then(response => {                                   
+                navigate("/");
                 console.log("Note created successfully", response.data);
             })
             .catch(error => {

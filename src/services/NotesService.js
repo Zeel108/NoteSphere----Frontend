@@ -11,5 +11,9 @@ const create = data => {
 const details = id => {          
     return httpClient.get(`/notedetails/${id}`);
 } 
+
+const deletenote = id => {
+    return httpClient.delete(`/notedelete/${id}`);
+}
  
-export default {getAll, create, details};
+export default {getAll, create, details, deletenote};

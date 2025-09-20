@@ -5,7 +5,7 @@ const getAll = () => {
 }
 
 const create = data => {
-    return httpClient.post("/createnote",data);    
+    return httpClient.post("/createnote", data);    
 }                                                  
 
 const details = id => {          
@@ -15,5 +15,9 @@ const details = id => {
 const deletenote = id => {
     return httpClient.delete(`/notedelete/${id}`);
 }
+
+const updatenote = (id,note) => {
+    return httpClient.put(`/noteupdate/${id}`, note);
+}
  
-export default {getAll, create, details, deletenote};
+export default {getAll, create, details, deletenote, updatenote};

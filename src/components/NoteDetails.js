@@ -26,10 +26,13 @@ const NoteDetails = () => {
             })
             .catch((error) => {
                 console.log('something went wrong in getting details of note.',error);
-            })
-
-
+            });
     };
+
+    const EditNote = () => {
+        navigate(`/notedetail/noteupdate/${id}`);
+    }
+
 
     return (                
         <div className="note-details main-content">             
@@ -43,7 +46,9 @@ const NoteDetails = () => {
                         </div>
                         <div className="mb-3">{currentNote.body}</div>
                     </article>
-                    <button className="ml-3">Edit</button>
+                    <button className="ml-3"
+                            onClick={EditNote}
+                            >Edit</button>
                     <button className="ml-3"
                             onClick={DeleteNote}
                             >Delete</button>
